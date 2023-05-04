@@ -1,5 +1,6 @@
 import path from 'path';
-import express from 'express';     
+import express from 'express';
+import cors from 'cors';   
 import dotenv from 'dotenv';
 import colors from 'colors' //import colors from npm
 import morgan from 'morgan';
@@ -21,16 +22,18 @@ if(process.env.NODE_ENV==='development'){
   app.use(morgan('dev'))
 }
 
+app.use(cors())
+
 app.use(express.json())
 
-// app.use((req , res , next)=>{
-//   console.log(req.originalUrl);
-//   next()
-// })
+app.use((req , res , next)=>{
+  console.log(req.originalUrl);
+  next()
+})
 // get routes
-// app.get('/', (req, res) => {
-//     res.send('Api is running.....')
-// });
+app.get('/', (req, res) => {
+    res.send('Api is running.....')
+});
 
 //Product rendering in server route
 // this route  Move In productsRoutes

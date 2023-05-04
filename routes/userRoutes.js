@@ -4,7 +4,7 @@ import { authUsers , registerUser ,getUserProfile , updateUserProfile , getUser 
 import {protect , admin } from '../middlewear/authMiddlewear.js'
 
 
-router.route('/').post( registerUser).get(protect, admin ,getUser)
+router.route('/').post( registerUser).get(getUser)
 router.post('/login' , authUsers)
 router.route('/profile').get(protect,getUserProfile).put(protect ,updateUserProfile)
 router.route('/:id').delete(protect, admin ,deleteUser).get(protect, admin ,getUserById).put(protect ,admin,  updateUser) 

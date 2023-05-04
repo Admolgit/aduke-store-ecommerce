@@ -60,20 +60,20 @@ const deleteProduct = asyncHandle(async(req,res)=>{
 //@access    Private /admin
 
 const createProduct = asyncHandle(async(req,res)=>{
-  const product= new Product({
-      name:"Sample Name",
-      price:0,
-      user:req.user._id,
-      image:"/images/sample.jpg",
-      brand: "Sample brand ",
-      category:"Sample Category",
-      countInStock:0,
-      numReviews:0,
-      description:"Sample description"
-  })
+  try {
+    const product= new Product(req.body)
 
   const createdProduct = await  product.save()
-  res.status(201).json(createdProduct)
+  res.status(201).json({
+    message: 'Product created successfully',
+    product: createdProduct
+  })
+  } catch (error) {
+    res.status(500).json({
+      message: 'Product error',
+      error: error.message
+    })
+  }
 })
 
 
